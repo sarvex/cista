@@ -11,10 +11,10 @@ class CistaBitsetPrinter(object):
         self.values = [int(self.val["blocks_"]["el_"][index]) for index in range(self.n_words)]
 
     def to_string(self):
-        s = ""
-        for word_index in range(self.n_words):
-            s += format(self.values[word_index], '064b')
-        return s
+        return "".join(
+            format(self.values[word_index], '064b')
+            for word_index in range(self.n_words)
+        )
 
     def str(self):
         return self.to_string()

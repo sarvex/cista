@@ -35,7 +35,7 @@ class CistaTuplePrinter:
             member_address = self.this_as_char_ptr() + get_offset(self.val.type, current_idx)
             casted_member = member_address.reinterpret_cast(template_type.pointer()).dereference()
 
-            yield '[' + str(current_idx) + ']', casted_member
+            yield (f'[{str(current_idx)}]', casted_member)
 
             current_idx += 1
 

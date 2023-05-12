@@ -40,7 +40,7 @@ class CistaHashStoragePrinter:
         current_idx = 0
         for i in range(self.val.capacity):
             if self.val.is_valid_entry(i):
-                yield '[' + str(current_idx) + ']', (self.val.entries + i).dereference()
+                yield (f'[{str(current_idx)}]', (self.val.entries + i).dereference())
                 current_idx += 1
 
     def to_string(self):
@@ -132,8 +132,9 @@ class CistaHashStorageMatcher(gdb.xmethod.XMethodMatcher):
         workers = []
         for method in self.methods:
             if method.enabled:
-                worker = method.get_worker(method_name, class_type.template_argument(0))
-                if worker:
+                if worker := method.get_worker(
+                    method_name, class_type.template_argument(0)
+                ):
                     workers.extend(worker)
 
         return workers

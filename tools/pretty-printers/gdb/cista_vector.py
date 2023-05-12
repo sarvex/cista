@@ -32,7 +32,7 @@ class CistaVectorPrinter:
 
     def children(self):
         for idx in range(len(self.val)):
-            yield '[' + str(idx) + ']', self.val[idx]
+            yield (f'[{str(idx)}]', self.val[idx])
 
     def to_string(self):
         return str(self.val)
@@ -98,8 +98,7 @@ class CistaVectorMatcher(gdb.xmethod.XMethodMatcher):
         workers = []
         for method in self.methods:
             if method.enabled:
-                worker = method.get_worker(method_name)
-                if worker:
+                if worker := method.get_worker(method_name):
                     workers.append(worker)
 
         return workers
